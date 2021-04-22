@@ -1,7 +1,8 @@
-import {Model} from 'sequelize';
+import {Model, DataTypes} from 'sequelize';
+import db from '../../config/database';
 
-class User extends Model {
-    static init(sequelize, DataTypes) {
+class UserDao extends Model {
+    static init(sequelize) {
         return super.init(
             {
                 email: DataTypes.STRING,
@@ -11,9 +12,11 @@ class User extends Model {
     }
     static associate(models) {
         // define association here
-
+        this.hasMany(models.Book, {as: 'books'})
         return this;
     }
 };
 
-export default User;
+UserDao.init(db.sequelize);
+
+export default UserDao;

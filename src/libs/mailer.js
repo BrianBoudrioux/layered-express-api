@@ -43,4 +43,4 @@ class MailerService {
     }
 }
 
-module.exports = MailerService;
+export default MailerService;

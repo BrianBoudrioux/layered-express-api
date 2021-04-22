@@ -1,20 +1,25 @@
+import bcrypt from 'bcrypt';
 class UserRepository {
 
-    constructor(userDAO) {
-        this.userDAO = userDAO;
+    constructor(userDao) {
+        this.userDAO = userDao;
     }
 
-    async getAll() {
-        return await this.userDAO.findAll();
+    async findAll() {
+        return await this.userDAO.findAll({include: "books"});
     }
 
-    async register(userData) {
-        return await this.userDAO.create(userData);
+    async create(userEntity) {
+        const salt = bcrypt.genSaltSync(10);
+        userEntity.password = bcrypt.hashSync(userEntity.password, salt);
+        return await this.userDAO.create(userEntity);
     }
 
-    async getByMail(mail) {
-        return await this.userDAO.findOne({where: {email: mail}})
+    async findByEmail(userEntity) {
+        return await this.userDAO.findOne({where: {email: userEntity.email}});
     }
+
+    compareHash = async (password, hash) => await bcrypt.compareSync(password, hash);
 }
 
 export default UserRepository;

@@ -1,19 +1,16 @@
 class AuthMiddleware {
 
-    constructor(jwt) {
-        this.jwt = jwt;
+    constructor(jwtService) {
+        this.jwt = jwtService;
     }
 
     authenticate = async (req, res, next) => {
         try {
-            const authHeader = req.headers.authorization;
-            const bearer = 'Bearer ';
+            const token = req.cookies['auth-cookie'];
 
-            if (!authHeader || !authHeader.startsWith(bearer)) {
-                return res.status(401).json('Access denied. No credentials sent!');
+            if (!token) {
+                return res.status(401).json('Access denied. Your session expired');
             }
-
-            const token = authHeader.replace(bearer, '');
 
             // Verify Token
             const decoded = await this.jwt.decodeToken(token);
