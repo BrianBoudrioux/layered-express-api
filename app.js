@@ -16,7 +16,7 @@ const application = new Server(express, routes, middlewares, logger);
 (async () => {
     try {
         await db.associateAll(db.sequelize.models)
-        await db.sequelize.sync({atler: true})
+        await db.sequelize.sync({alter: true})
         await application.listen(config.app_port);
     } catch (e) {
         logger.log('warn', e.message);
