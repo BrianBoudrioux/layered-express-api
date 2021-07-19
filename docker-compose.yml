@@ -1,0 +1,20 @@
+version: '3.8'
+
+services: 
+    mysqldb:
+        image: mysql
+        restart: always
+        env_file: ./.env
+        environment:
+            - MYSQL_DATABASE=${DB_NAME}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+            - MYSQL_TCP_PORT=${DB_PORT}
+    express-app: 
+        build: .
+        restart: always
+        depends_on: 
+            - mysqldb
+        ports: 
+            - ${APP_PORT}:${APP_PORT}
+        volumes: 
+            - ./src:/app/src
