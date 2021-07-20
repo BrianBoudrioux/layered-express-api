@@ -21,14 +21,6 @@ jobs:
 
     - name: Start containers
       run: docker-compose -f "docker-compose.yml" up -d --build
-      env:
-          DB_USER: root
-          DB_PASSWORD: test
-          DB_NAME: bookstore
-          DB_PORT: 3307
-          DB_HOST: db
-          JWT_SECRET: supersecret
-          APP_PORT: 8080
 
     - name: Install node
       uses: actions/setup-node@v1
