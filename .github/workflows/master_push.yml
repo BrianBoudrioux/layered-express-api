@@ -1,11 +1,7 @@
-name: Test
+name: Test And Deploy
 
 on:
   push:
-    branches:
-    - master
-    - main
-  pull_request:
     branches:
     - master
     - main
@@ -19,9 +15,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Start containers
-      run: docker-compose -f "docker-compose.yml" up -d --build
-
     - name: Install node
       uses: actions/setup-node@v1
       with:
@@ -32,10 +25,6 @@ jobs:
 
     - name: Run tests
       run: npm run test
-
-    - name: Stop containers
-      if: always()
-      run: docker-compose -f "docker-compose.yml" down
 
   deploy:
     runs-on: ubuntu-latest
