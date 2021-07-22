@@ -28,7 +28,7 @@ jobs:
       
   auto_merge:
     name: auto_merge
-    if: github.event.review.state == 'approved'
+    if: github.event.pull_request.mergeable_state == 'clean'
     runs-on: ubuntu-latest
     needs: test
     steps:
