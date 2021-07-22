@@ -14,12 +14,12 @@ class bookService {
 
     async add(bookData) {
         const bookEntity = new BookEntity(bookData);
-        // if (!bookEntity.validate())
-        //     throw new ApiError(400, 'BookEntity validation failed');
+        if (!bookEntity.validate())
+            throw new ApiError(400, 'BookEntity validation failed');
         
-        // await this.bookRepo.create(bookEntity);
+        await this.bookRepo.create(bookEntity);
 
-        return 'bookEntity';
+        return bookEntity;
     }
 
 
