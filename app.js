@@ -19,6 +19,7 @@ const application = new Server(express, routes, middlewares, logger);
         await db.sequelize.sync({alter: true})
         await application.listen(config.app_port);
     } catch (e) {
+        console.error(e);
         logger.log('warn', e.message);
     }
 })()
