@@ -1,4 +1,5 @@
 import {handleError} from '../helpers/error';
+
 class Server {
     constructor(express, routes, middlewares, logger) {
         this.app = express();
