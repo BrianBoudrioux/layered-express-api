@@ -17,9 +17,9 @@ class bookService {
         // if (!bookEntity.validate())
         //     throw new ApiError(400, 'BookEntity validation failed');
         
-        await this.bookRepo.create(bookEntity);
+        // await this.bookRepo.create(bookEntity);
 
-        return bookEntity;
+        return 'bookEntity';
     }
 
 
