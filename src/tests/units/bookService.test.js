@@ -1,5 +1,5 @@
 import BookService from '../../modules/Book/service';
-import BookEntity from '../../modules/Book/entity';
+import bookDTO from '../../modules/Book/dto';
 import BookRepositoryMock from '../mocks/bookRepository.mock';
 
 const bookService = new BookService(BookRepositoryMock);
@@ -7,9 +7,9 @@ const bookService = new BookService(BookRepositoryMock);
 describe('Book USE-CASE : ', () => {
     
     describe('getAll use case : ', () => {
-        it('Should return a array of bookEntity instance', async () => {
+        it('Should return a array of bookDTO instance', async () => {
             const books = await bookService.getAll();
-            expect(books[0] instanceof BookEntity).toBe(true);
+            expect(books[0] instanceof bookDTO).toBe(true);
             expect(books[1].title).toBe('death note');
         });
         
@@ -21,14 +21,14 @@ describe('Book USE-CASE : ', () => {
                 await bookService.add({});
             } catch(e) {
                 expect(e.statusCode).toBe(400);
-                expect(e.message).toBe('BookEntity validation failed');
+                expect(e.message).toBe('bookDTO validation failed');
             }
         });
 
         it ('Should return a new instance of BookService with specified data', async () => {
-            const bookEntity = await bookService.add({title: 'one piece'});
-            expect(bookEntity instanceof BookEntity).toBe(true);
-            expect(bookEntity.title).toBe('one piece');
+            const bookDTO = await bookService.add({title: 'one piece'});
+            expect(bookDTO instanceof bookDTO).toBe(true);
+            expect(bookDTO.title).toBe('one piece');
         })
         
     });
