@@ -11,7 +11,7 @@ class BookRepositoryMock {
         return this.books;
     }
 
-    async create(bookEntity) {
+    async addNew(bookEntity) {
         this.books.push(bookEntity);
         return bookEntity;
     }
