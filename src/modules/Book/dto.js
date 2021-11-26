@@ -1,4 +1,4 @@
-class BookEntity {
+class BookDTO {
     
     constructor({id, title, UserId}) {
         this.id = id;
@@ -6,10 +6,6 @@ class BookEntity {
         this.UserId = UserId;
     }
 
-    validate() {
-        return (!this.title) ? false : true;
-    }
-
 }
 
-export default BookEntity;
+export default BookDTO;

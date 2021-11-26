@@ -1,17 +1,21 @@
+import { Router } from "express";
+import { auth } from "../../middlewares";
+
 class UserRouter {
 
-    constructor(router, auth, userController) {
-        this.router = router;
-        this.initializeRoutes(userController, auth);
+    constructor(controller) {
+        this.router = Router();
+        this.initializeRoutes(controller);
         return this.router;
     }
 
-    initializeRoutes(userController, auth) {
-        this.router.route('/users')
-            .get(auth.authenticate, userController.getAll)
-            .post(userController.register);
+    initializeRoutes(controller) {
 
-        this.router.route('/users/authenticate').post(userController.login);
+        this.router.route('/')
+            .get(auth.isAuth, controller.getAll)
+            .post(controller.register);
+
+        this.router.route('/authenticate').post(controller.login);
     }
 }
 

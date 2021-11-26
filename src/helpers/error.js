@@ -1,3 +1,5 @@
+import { logger } from '../middlewares';
+
 class ApiError extends Error {
     constructor(statusCode, message) {
         super();
@@ -6,7 +8,7 @@ class ApiError extends Error {
     }
 }
 
-const handleError = (err, res, logger) => {
+const handleError = (err, req, res, next) => {
     const {message} = err;
     const statusCode = (err.statusCode) ? err.statusCode : 500;
 

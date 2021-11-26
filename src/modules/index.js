@@ -1,6 +1,9 @@
 import {userRouter} from './User';
 import {bookRouter} from './Book';
 
-const routes = [userRouter, bookRouter];
+const routes = {
+    '/users': userRouter,
+    '/books': bookRouter
+};
 
 export default routes;

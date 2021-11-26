@@ -4,7 +4,7 @@ class AuthMiddleware {
         this.jwt = jwtService;
     }
 
-    authenticate = async (req, res, next) => {
+    isAuth = async (req, res, next) => {
         try {
             const token = req.cookies['auth-cookie'];
 

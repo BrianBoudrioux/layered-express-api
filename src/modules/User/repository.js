@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+
 class UserRepository {
 
     constructor(userDao) {
@@ -9,7 +10,7 @@ class UserRepository {
         return await this.userDAO.findAll({include: "books"});
     }
 
-    async create(userEntity) {
+    async addNew(userEntity) {
         const salt = bcrypt.genSaltSync(10);
         userEntity.password = bcrypt.hashSync(userEntity.password, salt);
         return await this.userDAO.create(userEntity);

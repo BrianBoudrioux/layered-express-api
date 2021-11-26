@@ -8,7 +8,7 @@ class BookRepository {
         return await this.bookDAO.findAll();
     }
 
-    async create(bookEntity) {
+    async addNew(bookEntity) {
         return await this.bookDAO.create(bookEntity);
     }
 

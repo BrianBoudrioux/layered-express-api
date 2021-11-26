@@ -1,15 +1,18 @@
+import { Router } from "express";
+import { auth, csrf } from "../../middlewares";
+
 class BookRouter {
 
-    constructor(router, bookController, middlewares) {
-        this.router = router;
-        this.initializeRoutes(bookController, middlewares);
+    constructor(controller) {
+        this.router = Router();
+        this.initializeRoutes(controller);
         return this.router;
     }
 
-    initializeRoutes(bookController, {auth, csrf}) {
-        this.router.route('/books')
-            .get(auth.authenticate, bookController.getAll)
-            .post(auth.authenticate, csrf, bookController.add);
+    initializeRoutes(controller) {
+        this.router.route('/')
+            .get(auth.isAuth, controller.getAll)
+            .post(auth.isAuth, csrf, controller.add);
     }
 }
 

@@ -1,4 +1,4 @@
-import BookEntity from './entity';
+import BookDTO from './dto';
 import { ApiError } from '../../helpers/error';
 
 class bookService {
@@ -9,17 +9,17 @@ class bookService {
     
     async getAll() {
         const books = await this.bookRepo.findAll();
-        return books.map((book) => new BookEntity(book));
+        return books.map((book) => new BookDTO(book));
     }
 
     async add(bookData) {
-        const bookEntity = new BookEntity(bookData);
-        if (!bookEntity.validate())
-            throw new ApiError(400, 'BookEntity validation failed');
-        
-        await this.bookRepo.create(bookEntity);
 
-        return bookEntity;
+        if (!bookData.title)
+            throw new ApiError(400, 'Book validation failed');
+        
+        const book = await this.bookRepo.addNew(bookData);
+
+        return new BookDTO(book);
     }
 
 
