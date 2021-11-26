@@ -26,9 +26,9 @@ describe('Book USE-CASE : ', () => {
         });
 
         it ('Should return a new instance of BookService with specified data', async () => {
-            const bookDTO = await bookService.add({title: 'one piece'});
-            expect(bookDTO instanceof bookDTO).toBe(true);
-            expect(bookDTO.title).toBe('one piece');
+            const book = await bookService.add({title: 'one piece'});
+            expect(book instanceof bookDTO).toBe(true);
+            expect(book.title).toBe('one piece');
         })
         
     });
