@@ -21,7 +21,7 @@ describe('Book USE-CASE : ', () => {
                 await bookService.add({});
             } catch(e) {
                 expect(e.statusCode).toBe(400);
-                expect(e.message).toBe('bookDTO validation failed');
+                expect(e.message).toBe('book validation failed');
             }
         });
 
