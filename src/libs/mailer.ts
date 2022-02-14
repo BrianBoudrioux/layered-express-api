@@ -1,10 +1,12 @@
-class MailerService {
+import UserDTO from "../modules/User/dto";
 
-    constructor(nodemailer) {
+class MailerService {
+    private nodemailer;
+    constructor(nodemailer: any) {
         this.nodemailer = nodemailer;
     }
 
-    async sendMail(user) {
+    async sendMail(user: UserDTO) {
 
         try {
             // Generate test SMTP service account from ethereal.email

@@ -1,19 +1,23 @@
 import UserDTO from './dto';
 import { ApiError } from '../../helpers/error';
+import UserRepository from './repository';
+import MailerService from '../../libs/mailer';
 
 class UserService {
 
-    constructor(userRepository, mailerService) {
+    private userRepo;
+    private mailerService;
+    constructor(userRepository: UserRepository, mailerService : MailerService) {
         this.userRepo = userRepository;
         this.mailerService = mailerService;
     }
 
     async getAll() {
         const users = await this.userRepo.findAll();
-        return users.map((user) => new UserDTO(user));
+        return users.map((user: any) => new UserDTO(user));
     }
 
-    async register(userData) {
+    async register(userData: any) {
         
         if (!userData.email || !userData.password)
             throw new ApiError(400, 'Missing required email and password fields');
@@ -23,7 +27,7 @@ class UserService {
         return new UserDTO(newUser);
     }
 
-    async login(userData) {
+    async login(userData : any) {
 
         if (!userData.email || !userData.password)
             throw new ApiError(400, 'Missing required email and password fields');

@@ -3,7 +3,7 @@ import Server from './src/config/server';
 import db from './src/config/database';
 import config from './src/config/env';
 import routes from './src/modules';
-import middlewares from './src/middlewares';
+import middlewares, {logger} from './src/middlewares';
 
 const http = express();
 const application = new Server(http, routes, middlewares);
@@ -13,8 +13,8 @@ const application = new Server(http, routes, middlewares);
         await db.associateAll(db.sequelize.models)
         await db.sequelize.sync({alter: true})
         await application.listen(config.app_port);
-    } catch (e) {
+    } catch (e: any) {
         console.error(e);
-        logger.log('warn', e.message);
+        logger.log(500, e.message);
     }
 })()

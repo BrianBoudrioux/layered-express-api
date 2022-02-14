@@ -8,6 +8,6 @@ import UserRouter from './router';
 const userRepository = new UserRepository(UserDao);
 const userService = new UserService(userRepository, mailerService);
 const userController = new UserController(userService, jwtService);
-const userRouter = new UserRouter(userController);
+const userRouter = UserRouter(userController);
 
 export {userRouter, UserDao};

@@ -1,5 +1,9 @@
+import { ApiError } from "./error";
+
 class Logger {
-    constructor(winston) {
+    public logger;
+    public stream;
+    constructor(winston: any) {
         this.logger = winston.createLogger({
         format: winston.format.json(),
         transports: [
@@ -19,11 +23,11 @@ class Logger {
         });
 
         this.stream = {
-            write: (msg) => this.logger.info(msg)
+            write: (msg: string) => this.logger.info(msg)
         };
     }
 
-    log(status, err) {
+    log(status: number, err: ApiError) {
         if (status < 500)
             this.logger.log('warn', err.stack);
         else {

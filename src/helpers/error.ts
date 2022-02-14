@@ -1,14 +1,17 @@
+import { NextFunction, Response } from 'express';
+import { Request } from 'express';
 import { logger } from '../middlewares';
 
 class ApiError extends Error {
-    constructor(statusCode, message) {
+    public statusCode;
+    constructor(statusCode: number, message: string) {
         super();
         this.statusCode = statusCode;
         this.message = message;
     }
 }
 
-const handleError = (err, req, res, next) => {
+const handleError = (err: ApiError, req: Request, res: Response, next: NextFunction) => {
     const {message} = err;
     const statusCode = (err.statusCode) ? err.statusCode : 500;
 

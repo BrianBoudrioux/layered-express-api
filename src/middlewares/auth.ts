@@ -1,10 +1,14 @@
+import { Request, Response, NextFunction } from 'express';
+import JwtService from "../libs/jwt";
+
 class AuthMiddleware {
 
-    constructor(jwtService) {
+    private jwt;
+    constructor(jwtService: JwtService) {
         this.jwt = jwtService;
     }
 
-    isAuth = async (req, res, next) => {
+    isAuth = async (req: Request | any, res: Response, next: NextFunction) => {
         try {
             const token = req.cookies['auth-cookie'];
 
