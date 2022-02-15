@@ -1,6 +1,6 @@
 import UserDTO from './dto';
 import { ApiError } from '../../helpers/error';
-import MailerService from '../../libs/mailer';
+import { IMailerService } from './../../libs/mailer';
 import { IUserRepository } from './repository';
 import { User } from './entity';
 
@@ -14,7 +14,7 @@ export default class UserService implements IUserService {
 
     private userRepo;
     private mailerService;
-    constructor(userRepository: IUserRepository, mailerService : MailerService) {
+    constructor(userRepository: IUserRepository, mailerService : IMailerService) {
         this.userRepo = userRepository;
         this.mailerService = mailerService;
     }
