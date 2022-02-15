@@ -1,14 +1,15 @@
 import { Response } from 'express';
 import { Request } from 'express';
 import {handleError} from '../helpers/error';
+import { Server } from '@overnightjs/core'
 
-class Server {
+class App extends Server {
 
-    private app;
-    constructor(http: any, routes: Object, middlewares: Object) {
-        this.app = http;
+    constructor(routes: Array<Object>, middlewares: Object) {
+        super();
+
         this.initializeMiddlewares(middlewares);
-        this.initializeRouter(routes);
+        super.addControllers(routes);
         this.initializeErrorHandler();
     }
 
@@ -24,12 +25,6 @@ class Server {
         }
     }
 
-    initializeRouter(routes: any) {
-        for (let path in routes) {
-            this.app.use(path, routes[path]);
-        }
-    }
-
     initializeErrorHandler() {
         this.app.use(handleError);
     }
@@ -39,4 +34,4 @@ class Server {
     }
 }
 
-export default Server;
+export default App;

@@ -1,27 +1,34 @@
-import { Model } from 'sequelize';
+import {EntityRepository, EntityManager} from "typeorm";
 import bcrypt from 'bcrypt';
-import { UserDao } from '.';
-import UserDTO from './dto';
+import { User } from "./entity";
 
-class UserRepository {
+export interface IUserRepository {
+    findAll() : Promise<User[]>
+    addNew(userEntity: any) : Promise<any>
+    findByEmail(userEntity: any) : Promise<User | undefined>
+    compareHash(password: string, hash: string) : Promise<boolean> 
+}
 
-    private userDAO;
-    constructor(userDao: any) {
-        this.userDAO = userDao;
+@EntityRepository()
+class UserRepository implements IUserRepository {
+
+    constructor(private manager: EntityManager) {
     }
 
     async findAll() {
-        return await this.userDAO.findAll({include: "books"});
+        return await this.manager.find(User);
     }
 
     async addNew(userEntity: any) {
         const salt = bcrypt.genSaltSync(10);
         userEntity.password = bcrypt.hashSync(userEntity.password, salt);
-        return await this.userDAO.create(userEntity);
+        return await this.manager.save(User, userEntity);
     }
 
     async findByEmail(userEntity: any) {
-        return await this.userDAO.findOne({where: {email: userEntity.email}});
+        console.log(userEntity);
+        
+        return await this.manager.findOne(User, {email: userEntity.email});
     }
 
     compareHash = async (password: string, hash: string) => await bcrypt.compareSync(password, hash);

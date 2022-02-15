@@ -1,9 +1,9 @@
-import {userRouter} from './User';
-import {bookRouter} from './Book';
+import {userController} from './User';
+import {bookController} from './Book';
 
-const routes = {
-    '/users': userRouter,
-    '/books': bookRouter
-};
+const routes = [
+    userController,
+    bookController
+]
 
 export default routes;

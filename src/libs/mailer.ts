@@ -1,12 +1,16 @@
-import UserDTO from "../modules/User/dto";
+import { User } from './../modules/User/entity';
 
-class MailerService {
+export interface IMailerService {
+    sendMail(user: User) : Promise<void>
+}
+
+class MailerService implements IMailerService {
     private nodemailer;
     constructor(nodemailer: any) {
         this.nodemailer = nodemailer;
     }
 
-    async sendMail(user: UserDTO) {
+    async sendMail(user: User) {
 
         try {
             // Generate test SMTP service account from ethereal.email

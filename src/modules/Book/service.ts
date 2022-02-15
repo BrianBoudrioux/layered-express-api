@@ -1,9 +1,17 @@
+import { Book } from './entity';
 import BookDTO from './dto';
 import { ApiError } from '../../helpers/error';
+import { IBookRepository } from './repository';
 
-class bookService {
+export interface IBookService {
+    getAll() : Promise<BookDTO[]>
+    add(bookData: Book) : Promise<BookDTO>
+}
 
-    constructor(bookRepository) {
+class bookService implements IBookService {
+
+    private bookRepo;
+    constructor(bookRepository: IBookRepository) {
         this.bookRepo = bookRepository;
     }
     
@@ -12,9 +20,9 @@ class bookService {
         return books.map((book) => new BookDTO(book));
     }
 
-    async add(bookData) {
+    async add(bookData: Book) {
 
-        if (!bookData.title)
+        if (!bookData.title || !bookData.content)
             throw new ApiError(400, 'Book validation failed');
         
         const book = await this.bookRepo.addNew(bookData);

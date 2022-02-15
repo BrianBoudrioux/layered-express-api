@@ -1,15 +1,20 @@
-import JwtService from "../../libs/jwt";
-import UserService from "./service";
 import { Response, Request, NextFunction } from "express";
+import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/core'
+import JwtService from "../../libs/jwt";
+import { IUserService } from './service';
+import { auth } from "../../middlewares";
 
+@Controller('users')
 class UserController {
     private userService;
     private jwtService;
-    constructor(userService: UserService, jwtService: JwtService) {
+    constructor(userService: IUserService, jwtService: JwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
     }
 
+    @Get()
+    @Middleware(auth.isAuth)
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let users = await this.userService.getAll();
@@ -19,6 +24,7 @@ class UserController {
         }
     }
 
+    @Post()
     register = async (req: Request, res: Response, next: NextFunction) => {
         try {
             // console.log('toto');
@@ -31,6 +37,7 @@ class UserController {
         }
     }
 
+    @Post('login')
     login = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user = await this.userService.login({...req.body});

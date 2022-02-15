@@ -1,8 +1,20 @@
-import {Sequelize} from 'sequelize';
-import config from './env';
+import {getConnectionManager} from "typeorm";
+import { Book } from '../modules/Book/entity';
+import { User } from '../modules/User/entity';
 
-const sequelize = new Sequelize(config.db_name, config.db_user, config.db_password, {dialect: "mysql", port: config.db_port, host: config.db_host});
-const associateAll = async (models: any) => Object.values(models).map((model: any) => model.associate(models));
-const db = {sequelize, Sequelize, associateAll};
+const entities = [User, Book];
+
+const connectionManager = getConnectionManager();
+const db = connectionManager.create({
+    type: "mysql",
+    host: "localhost",
+    port: 3306,
+    username: "root",
+    password: "root",
+    database: "bookstore",
+    logging: true,
+    synchronize: true,
+    entities: entities
+});
 
 export default db;
