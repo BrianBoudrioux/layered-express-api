@@ -32,14 +32,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const server_1 = __importDefault(require("./config/server"));
-const database_1 = require("./config/database");
+const database_1 = __importDefault(require("./config/database"));
 const env_1 = __importDefault(require("./config/env"));
 const modules_1 = __importDefault(require("./modules"));
 const middlewares_1 = __importStar(require("./middlewares"));
 const application = new server_1.default(modules_1.default, middlewares_1.default);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield database_1.db.connect();
+        yield database_1.default.connect();
         application.listen(env_1.default.app_port);
     }
     catch (e) {

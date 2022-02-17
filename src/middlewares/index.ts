@@ -6,6 +6,7 @@ import winston from 'winston';
 import Logger from '../helpers/logger';
 import morgan from 'morgan';
 import csurf from 'csurf';
+import cors from 'cors';
 
 // middlewares
 import AuthMiddleware from './auth';
@@ -14,6 +15,7 @@ import AuthMiddleware from './auth';
 const auth = new AuthMiddleware(jwtService);
 const logger = new Logger(winston);
 const csrf = csurf({ cookie: true });
+const corsOptions = { origin: "https://brianboudrioux.fr", credentials: true };
 
 // export all custom middlewares
 export { auth, logger, csrf };
@@ -24,5 +26,6 @@ export default {
     json: express.json(),
     cookieParser: cookieParser(),
     apiLogger: morgan('combined', { stream: logger.stream }),
-    csrf
+    cors: cors(corsOptions),
+    csrf,
 }

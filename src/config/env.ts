@@ -3,12 +3,12 @@ dotenv.config();
 
 const config = {
     app_port: process.env.APP_PORT || "3000",
-    db_port: Number(process.env.DB_PORT) || 3306,
-    db_name: process.env.DB_NAME || "bookstore",
-    db_user: process.env.DB_USER || "root",
-    db_host: process.env.DB_HOST || "localhost",
-    db_type: process.env.DB_TYPE || 'mysql',
-    db_password: process.env.DB_PASSWORD || "root",
+    db_port: Number(process.env.TYPEORM_PORT) || 3306,
+    db_name: process.env.TYPEORM_DATABASE || "bookstore",
+    db_user: process.env.TYPEORM_USERNAME || "root",
+    db_host: process.env.TYPEORM_HOST || "localhost",
+    db_type: process.env.TYPEORM_CONNECTION || 'mysql',
+    db_password: process.env.TYPEORM_PASSWORD || "root",
     jwt_secret: process.env.JWT_SECRET || "blabla"
 }
 

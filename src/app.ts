@@ -1,5 +1,5 @@
 import App from './config/server';
-import {db} from './config/database';
+import db from './config/database';
 import config from './config/env';
 import routes from './modules';
 import middlewares, {logger} from './middlewares';
