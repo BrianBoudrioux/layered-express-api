@@ -9,7 +9,7 @@
             "es5",
             "es6"
         ],
-        "allowJs": true,
+        "allowJs": false,
         "outDir": "build",
         "rootDir": "src",
         "strict": true,
