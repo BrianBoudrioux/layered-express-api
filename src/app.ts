@@ -1,8 +1,8 @@
-import App from './src/config/server';
-import db from './src/config/database';
-import config from './src/config/env';
-import routes from './src/modules';
-import middlewares, {logger} from './src/middlewares';
+import App from './config/server'
+import db from './config/database'
+import config from './config/env'
+import routes from './modules'
+import middlewares, {logger} from './middlewares'
 
 const application = new App(routes, middlewares);
 
