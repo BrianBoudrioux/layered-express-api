@@ -13,11 +13,7 @@ const options = {
     "password": env_1.default.db_password,
     "database": env_1.default.db_name,
     "logging": true,
-    "entities": ["src/modules/**/entity{.js,.ts}"],
-    "migrations": ["src/config/migration/*{.js,.ts}"],
-    "cli": {
-        "migrationsDir": "src/config/migration"
-    }
+    "entities": [__dirname + "/../modules/**/entity.{js,ts}"],
 };
 const connectionManager = (0, typeorm_1.getConnectionManager)();
 const db = connectionManager.create(options);

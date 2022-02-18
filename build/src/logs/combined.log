@@ -1,0 +1,1 @@
+{"message":"::1 - - [18/Feb/2022:00:30:05 +0000] \"POST /users/login HTTP/1.1\" 200 37 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36\"\n","level":"info"}
