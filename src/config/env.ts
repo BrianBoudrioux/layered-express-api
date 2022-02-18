@@ -9,6 +9,9 @@ const config = {
     db_host: process.env.TYPEORM_HOST || "localhost",
     db_type: process.env.TYPEORM_CONNECTION || 'mysql',
     db_password: process.env.TYPEORM_PASSWORD || "root",
+    db_entities: process.env.TYPEORM_ENTITIES || '',
+    db_migration: process.env.TYPEORM_MIGRATIONS || '',
+    db_migrationDir: process.env.TYPEORM_MIGRATIONS_DIR || '',
     jwt_secret: process.env.JWT_SECRET || "blabla"
 }
 

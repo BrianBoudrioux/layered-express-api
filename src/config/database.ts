@@ -9,11 +9,7 @@ const options: ConnectionOptions = {
     "password": config.db_password,
     "database": config.db_name,
     "logging": true,
-    "entities": ["src/modules/**/entity{.js,.ts}"],
-    "migrations": ["src/config/migration/*{.js,.ts}"],
-    "cli": {
-        "migrationsDir": "src/config/migration"
-    }
+    "entities": [__dirname + "/../modules/**/entity.{js,ts}"],
 }
 
 const connectionManager = getConnectionManager();
