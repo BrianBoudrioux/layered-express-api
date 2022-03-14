@@ -1,13 +1,18 @@
-import UserDTO from './dto';
 import { ApiError } from '../../helpers/error';
 import { IMailerService } from './../../libs/mailer';
-import { IUserRepository } from './repository';
 import { User } from './entity';
 
 export interface IUserService {
-    getAll() : Promise<UserDTO[]>
-    register(userData: any) : Promise<UserDTO>
-    login(userData: any) : Promise<UserDTO>
+    getAll() : Promise<User[]>
+    register(userData: User) : Promise<User>
+    login(userData: User) : Promise<User>
+}
+
+export interface IUserRepository {
+    findAll(): Promise<User[]>
+    addNew(userEntity: any): Promise<any>
+    findByEmail(userEntity: any): Promise<User | undefined>
+    compareHash(password: string, hash: string): Promise<boolean>
 }
 
 export default class UserService implements IUserService {
@@ -21,7 +26,7 @@ export default class UserService implements IUserService {
 
     async getAll() {
         const users = await this.userRepo.findAll();
-        return users.map((user: any) => new UserDTO(user));
+        return users;
     }
 
     async register(userData: User) {
@@ -31,7 +36,7 @@ export default class UserService implements IUserService {
         
         const newUser = await this.userRepo.addNew(userData);
         await this.mailerService.sendMail(userData);
-        return new UserDTO(newUser);
+        return newUser;
     }
 
     async login(userData : User) {
@@ -40,7 +45,6 @@ export default class UserService implements IUserService {
             throw new ApiError(400, 'Missing required email and password fields');
         
         const user = await this.userRepo.findByEmail(userData);
-        console.log(user);
         
         if (!user)
             throw new ApiError(400, 'User with the specified email does not exists');
@@ -49,6 +53,6 @@ export default class UserService implements IUserService {
         if (!passwordMatch)
             throw new ApiError(400, 'User password do not match');
 
-        return new UserDTO(user);
+        return user;
     }
 }

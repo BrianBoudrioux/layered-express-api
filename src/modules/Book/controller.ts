@@ -3,6 +3,7 @@ import { Response, NextFunction } from 'express';
 import { IBookService } from './service';
 import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/core'
 import { auth, csrf } from '../../middlewares';
+import BookDTO from './dto';
 
 @Controller('books')
 class BookController {
@@ -17,7 +18,8 @@ class BookController {
     getAll = async ({res, next} : {res: Response, next: NextFunction}) => {
         try {
             let books = await this.bookService.getAll();
-            res.status(200).json(books);
+            const result = books.map((book) => new BookDTO(book));
+            res.status(200).json(result);
         } catch (err) {
             next(err);
         }
@@ -28,7 +30,7 @@ class BookController {
     add = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const book = await this.bookService.add({...req.body});
-            res.status(201).json(book);
+            res.status(201).json(new BookDTO(book));
         }
         catch (err) {
             next(err);

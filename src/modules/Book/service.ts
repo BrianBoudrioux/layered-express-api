@@ -1,11 +1,15 @@
-import { Book } from './entity';
-import BookDTO from './dto';
+import { Book, book } from './entity';
 import { ApiError } from '../../helpers/error';
-import { IBookRepository } from './repository';
 
 export interface IBookService {
-    getAll() : Promise<BookDTO[]>
-    add(bookData: Book) : Promise<BookDTO>
+    getAll() : Promise<Book[]>
+    add(bookData: book) : Promise<Book>
+}
+
+export interface IBookRepository {
+    findAll(): Promise<any[]>
+    addNew(book: book): Promise<any>
+    findByUser(email: string): Promise<any>
 }
 
 class bookService implements IBookService {
@@ -17,17 +21,17 @@ class bookService implements IBookService {
     
     async getAll() {
         const books = await this.bookRepo.findAll();
-        return books.map((book) => new BookDTO(book));
+        return books;
     }
 
-    async add(bookData: Book) {
+    async add(bookData: book) {
 
         if (!bookData.title || !bookData.content)
             throw new ApiError(400, 'Book validation failed');
         
         const book = await this.bookRepo.addNew(bookData);
 
-        return new BookDTO(book);
+        return book;
     }
 
 

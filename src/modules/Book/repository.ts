@@ -1,12 +1,8 @@
 import {EntityRepository, EntityManager} from "typeorm";
 import { Book } from "./entity";
 import { User } from "../User/entity";
-
-export interface IBookRepository {
-    findAll() : Promise<Book[]>
-    addNew(book: Book) : Promise<Book>
-    findByUser(email: string) : Promise<Book | undefined>
-}
+import { IBookRepository } from "./service";
+import { book } from "./entity";
 
 @EntityRepository()
 class BookRepository implements IBookRepository {
@@ -19,7 +15,7 @@ class BookRepository implements IBookRepository {
         return await this.manager.find(Book);
     }
 
-    async addNew(book: Book) {
+    async addNew(book: book) {
         return await this.manager.save(Book, book);
     }
 

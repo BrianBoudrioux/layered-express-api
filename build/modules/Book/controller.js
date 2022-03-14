@@ -17,15 +17,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@overnightjs/core");
 const middlewares_1 = require("../../middlewares");
+const dto_1 = __importDefault(require("./dto"));
 let BookController = class BookController {
     constructor(bookService) {
         this.getAll = ({ res, next }) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let books = yield this.bookService.getAll();
-                res.status(200).json(books);
+                const result = books.map((book) => new dto_1.default(book));
+                res.status(200).json(result);
             }
             catch (err) {
                 next(err);
@@ -34,7 +39,7 @@ let BookController = class BookController {
         this.add = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const book = yield this.bookService.add(Object.assign({}, req.body));
-                res.status(201).json(book);
+                res.status(201).json(new dto_1.default(book));
             }
             catch (err) {
                 next(err);

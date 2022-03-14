@@ -24,12 +24,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@overnightjs/core");
 const jwt_1 = __importDefault(require("../../libs/jwt"));
 const middlewares_1 = require("../../middlewares");
+const dto_1 = __importDefault(require("./dto"));
 let UserController = class UserController {
     constructor(userService, jwtService) {
         this.getAll = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let users = yield this.userService.getAll();
-                res.status(200).json(users);
+                const result = users.map((user) => new dto_1.default(user));
+                res.status(200).json(result);
             }
             catch (err) {
                 next(err);
@@ -37,9 +39,8 @@ let UserController = class UserController {
         });
         this.register = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                // console.log('toto');
                 const user = yield this.userService.register(Object.assign({}, req.body));
-                res.status(201).json(user);
+                res.status(201).json(new dto_1.default(user));
             }
             catch (err) {
                 next(err);
@@ -50,7 +51,7 @@ let UserController = class UserController {
                 const user = yield this.userService.login(Object.assign({}, req.body));
                 const token = yield this.jwtService.generateToken({ id: user.id });
                 res.cookie('auth-cookie', token, { expires: new Date(Date.now() + (30 * 86400 * 1000)) });
-                res.status(200).json(user);
+                res.status(200).json(new dto_1.default(user));
             }
             catch (err) {
                 next(err);

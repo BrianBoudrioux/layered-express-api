@@ -8,11 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dto_1 = __importDefault(require("./dto"));
 const error_1 = require("../../helpers/error");
 class bookService {
     constructor(bookRepository) {
@@ -21,7 +17,7 @@ class bookService {
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
             const books = yield this.bookRepo.findAll();
-            return books.map((book) => new dto_1.default(book));
+            return books;
         });
     }
     add(bookData) {
@@ -29,7 +25,7 @@ class bookService {
             if (!bookData.title || !bookData.content)
                 throw new error_1.ApiError(400, 'Book validation failed');
             const book = yield this.bookRepo.addNew(bookData);
-            return new dto_1.default(book);
+            return book;
         });
     }
 }

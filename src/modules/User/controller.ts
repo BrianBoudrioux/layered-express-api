@@ -3,6 +3,7 @@ import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/cor
 import JwtService from "../../libs/jwt";
 import { IUserService } from './service';
 import { auth } from "../../middlewares";
+import UserDTO from './dto';
 
 @Controller('users')
 class UserController {
@@ -18,7 +19,8 @@ class UserController {
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let users = await this.userService.getAll();
-            res.status(200).json(users);
+            const result = users.map((user) => new UserDTO(user));
+            res.status(200).json(result);
         } catch (err) {
             next(err);
         }
@@ -27,10 +29,8 @@ class UserController {
     @Post()
     register = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            // console.log('toto');
-
             const user = await this.userService.register({...req.body});
-            res.status(201).json(user);
+            res.status(201).json(new UserDTO(user));
         }
         catch (err) {
             next(err);
@@ -43,7 +43,7 @@ class UserController {
             const user = await this.userService.login({...req.body});
             const token = await this.jwtService.generateToken({ id: user.id });
             res.cookie('auth-cookie', token, {expires: new Date(Date.now() + (30 * 86400 * 1000))});
-            res.status(200).json(user);
+            res.status(200).json(new UserDTO(user));
         } catch (err) {
             next(err);
         }
