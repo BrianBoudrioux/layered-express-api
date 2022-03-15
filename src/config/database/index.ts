@@ -1,5 +1,5 @@
 import {ConnectionOptions, getConnectionManager} from "typeorm";
-import config from './env';
+import config from '../env';
 
 const options: ConnectionOptions = {
     "type": 'mysql',
@@ -8,9 +8,12 @@ const options: ConnectionOptions = {
     "username": config.db_user,
     "password": config.db_password,
     "database": config.db_name,
-    "logging": true,
-    "entities": [__dirname + "/../modules/**/entity.{js,ts}"],
+    "logging": false,
+    "migrationsRun": true,
+    "entities": [__dirname + "/../../modules/**/entity.{js,ts}"],
 }
+console.log(__dirname);
+
 
 const connectionManager = getConnectionManager();
 

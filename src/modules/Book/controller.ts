@@ -1,9 +1,9 @@
-import { Request } from 'express';
-import { Response, NextFunction } from 'express';
-import { IBookService } from './service';
+import { Request, Response, NextFunction } from 'express';
 import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/core'
-import { auth, csrf } from '../../middlewares';
+import { auth, csrf } from '../../config/middlewares';
 import BookDTO from './dto';
+import { Book } from './entity';
+import {IBookService} from '../../helpers/interfaces/book.interfaces';
 
 @Controller('books')
 class BookController {
@@ -18,7 +18,7 @@ class BookController {
     getAll = async ({res, next} : {res: Response, next: NextFunction}) => {
         try {
             let books = await this.bookService.getAll();
-            const result = books.map((book) => new BookDTO(book));
+            const result = books.map((book: Book) => new BookDTO(book));
             res.status(200).json(result);
         } catch (err) {
             next(err);

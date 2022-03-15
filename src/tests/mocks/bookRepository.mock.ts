@@ -1,32 +1,24 @@
-import { Book, book } from '../../modules/Book/entity';
+import { Book } from "../../modules/Book/entity";
+import { book } from "../../helpers/types/book.types";
+import { IBookRepository } from "../../helpers/interfaces/book.interfaces";
 
-const books = [
-    {title: 'one piece', content: 'rr', author: 'ee'},
-    {title: 'dark souls', content: 'rr', author: 'ee'}
-];
+const books: Book[] = [];
 
-interface IBookRepositoryMock {
-    findAll(): Promise<book[]>
-    addNew(book: book): Promise<book>
-    findByUser(email: string): Promise<book[] | undefined>
-}
-
-class BookRepositoryMock implements IBookRepositoryMock {
-
+export default class BookRepositoryMock implements IBookRepository {
     async findAll() {
-        return  books;
+        return books;
     }
 
-    async addNew(bookEntity: book) {
-        books.push(bookEntity);
-        return books[books.length - 1];
+    async addNew(book: book) {
+        const result = new Book();
+        result.title = book.title;
+        result.content = book.content;
+        result.author = book.author;
+        books.push(result);
+        return result;
     }
 
     async findByUser(email: string) {
-        const results = books.filter((book) => book);
-        return results;
+        return books[0];
     }
-
 }
-
-export default BookRepositoryMock;

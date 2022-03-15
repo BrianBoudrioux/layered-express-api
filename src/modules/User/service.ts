@@ -1,19 +1,7 @@
-import { ApiError } from '../../helpers/error';
+import ApiError  from '../../helpers/error';
 import { IMailerService } from './../../libs/mailer';
 import { User } from './entity';
-
-export interface IUserService {
-    getAll() : Promise<User[]>
-    register(userData: User) : Promise<User>
-    login(userData: User) : Promise<User>
-}
-
-export interface IUserRepository {
-    findAll(): Promise<User[]>
-    addNew(userEntity: any): Promise<any>
-    findByEmail(userEntity: any): Promise<User | undefined>
-    compareHash(password: string, hash: string): Promise<boolean>
-}
+import {IUserService, IUserRepository} from '../../helpers/interfaces/user.interfaces';
 
 export default class UserService implements IUserService {
 

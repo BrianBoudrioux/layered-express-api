@@ -37,11 +37,11 @@ class MailerService implements IMailerService {
                 html: "<b>Hello world?</b>", // html body
             });
 
-            console.log("Message sent: %s", info.messageId);
-            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+            // console.log("Message sent: %s", info.messageId);
+            // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-            // Preview only available when sending through an Ethereal account
-            console.log("Preview URL: %s", this.nodemailer.getTestMessageUrl(info));
+            // // Preview only available when sending through an Ethereal account
+            // console.log("Preview URL: %s", this.nodemailer.getTestMessageUrl(info));
         } catch(err) {
             throw new Error('Unable to send the email verification');
         }

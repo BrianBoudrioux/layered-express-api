@@ -1,8 +1,8 @@
 import {EntityRepository, EntityManager} from "typeorm";
 import { Book } from "./entity";
 import { User } from "../User/entity";
-import { IBookRepository } from "./service";
-import { book } from "./entity";
+import { IBookRepository } from '../../helpers/interfaces/book.interfaces';
+import { book } from "../../helpers/types/book.types";
 
 @EntityRepository()
 class BookRepository implements IBookRepository {

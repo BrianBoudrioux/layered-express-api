@@ -1,7 +1,6 @@
-import { Response } from 'express';
-import { Request } from 'express';
-import {handleError} from '../helpers/error';
+import { Request, Response } from 'express';
 import { Server } from '@overnightjs/core'
+import handleError from './middlewares/handleError';
 
 class App extends Server {
 

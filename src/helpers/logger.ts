@@ -1,4 +1,4 @@
-import { ApiError } from "./error";
+import ApiError from "./error";
 
 class Logger {
     public logger;

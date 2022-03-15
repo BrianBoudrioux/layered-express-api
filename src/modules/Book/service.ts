@@ -1,16 +1,6 @@
-import { Book, book } from './entity';
-import { ApiError } from '../../helpers/error';
-
-export interface IBookService {
-    getAll() : Promise<Book[]>
-    add(bookData: book) : Promise<Book>
-}
-
-export interface IBookRepository {
-    findAll(): Promise<any[]>
-    addNew(book: book): Promise<any>
-    findByUser(email: string): Promise<any>
-}
+import ApiError  from '../../helpers/error';
+import { book } from '../../helpers/types/book.types';
+import {IBookRepository, IBookService} from '../../helpers/interfaces/book.interfaces';
 
 class bookService implements IBookService {
 

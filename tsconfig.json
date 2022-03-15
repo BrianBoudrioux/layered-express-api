@@ -9,10 +9,7 @@
             "es5",
             "es6"
         ],
-        "types": [
-            "node",
-            "jest"
-        ],
+        "types": ["node", "jest"],
         "allowJs": false,
         "outDir": "build",
         "rootDir": "src",

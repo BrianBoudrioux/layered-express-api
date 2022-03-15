@@ -19,9 +19,3 @@ export class Book extends BaseEntity {
     @OneToMany(() => User, user => user.book)
     users: User[];
 }
-
-export type book = {
-    title: string,
-    content: string,
-    author: string,
-}
