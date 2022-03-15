@@ -12,8 +12,6 @@ const options: ConnectionOptions = {
     "migrationsRun": true,
     "entities": [__dirname + "/../../modules/**/entity.{js,ts}"],
 }
-console.log(__dirname);
-
 
 const connectionManager = getConnectionManager();
 
