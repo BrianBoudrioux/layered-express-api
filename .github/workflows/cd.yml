@@ -1,9 +1,9 @@
-name: Build And Deploy
+name: CD - Build & Deploy & Release
 
 on:
   push:
     branches:
-    - typescript
+    - master
 
 jobs:
   build:
