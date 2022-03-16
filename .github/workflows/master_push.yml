@@ -3,8 +3,7 @@ name: Test And Deploy
 on:
   push:
     branches:
-    - master
-    - main
+    - typescript
 
 jobs:
   test:
