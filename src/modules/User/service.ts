@@ -39,7 +39,7 @@ export default class UserService implements IUserService {
 
         const passwordMatch = await this.userRepo.compareHash(userData.password, user.password);
         if (!passwordMatch)
-            throw new ApiError(400, 'User password do not match');
+            throw new ApiError(400, 'Email or password do not match');
 
         return user;
     }
