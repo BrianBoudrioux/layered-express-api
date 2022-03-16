@@ -9,7 +9,7 @@ const options: ConnectionOptions = {
     "password": config.db_password,
     "database": config.db_name,
     "logging": false,
-    "synchronize": true,
+    "synchronize": false,
     "migrationsRun": true,
     "entities": [__dirname + "/../../modules/**/entity.{js,ts}"],
     "TYPEORM_MIGRATIONS": "src/config/database/migration/*.ts",
