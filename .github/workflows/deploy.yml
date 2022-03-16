@@ -44,13 +44,4 @@ jobs:
       - name: Deploy with rsync
         run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/layered-express-api/build/
         
-      - name: Reload app
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd ~/home/ubuntu
-            pm2 restart app
+        
