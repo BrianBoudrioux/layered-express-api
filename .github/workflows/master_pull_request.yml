@@ -41,7 +41,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       
     - name: start mysql service
       run: |
@@ -52,7 +52,7 @@ jobs:
           mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "CREATE DATABASE bookstore"
 
     - name: Install node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: 16.x
 
