@@ -6,6 +6,9 @@ on:
     - master
     - main
     - typescript
+  push:
+    branches:
+    - typescript
 
 jobs:
   test:
