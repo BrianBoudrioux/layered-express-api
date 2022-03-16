@@ -20,7 +20,7 @@ export default class UserService implements IUserService {
     async register(userData: User) {
         
         if (!userData.email || !userData.password)
-            throw new ApiError(400, 'Missing required email and password fields');
+            throw new ApiError(400, 'Missing required email or password fields');
         
         const newUser = await this.userRepo.addNew(userData);
         await this.mailerService.sendMail(userData);
@@ -30,7 +30,7 @@ export default class UserService implements IUserService {
     async login(userData : User) {
 
         if (!userData.email || !userData.password)
-            throw new ApiError(400, 'Missing required email and password fields');
+            throw new ApiError(400, 'Missing required email or password fields');
         
         const user = await this.userRepo.findByEmail(userData);
         
@@ -39,7 +39,7 @@ export default class UserService implements IUserService {
 
         const passwordMatch = await this.userRepo.compareHash(userData.password, user.password);
         if (!passwordMatch)
-            throw new ApiError(400, 'Email or password do not match');
+            throw new ApiError(400, 'Email/password do not match');
 
         return user;
     }
