@@ -45,12 +45,18 @@ jobs:
         
       - name: Deploy with rsync
         run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/layered-express-api/build/
-        
-      - name: Release
-        uses: softprops/action-gh-release@v1
+          
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
         with:
-          draft: false
-          body_path: CHANGELOG.md
-          name: ${{ steps.version.outputs.version }}
           tag_name: ${{ github.ref }}
-          token: ${{ secrets.TOKEN }}
+          release_name: ${{ github.ref }}
+          body: ${{steps.github_release.outputs.changelog}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
