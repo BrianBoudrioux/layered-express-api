@@ -15,6 +15,20 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     
+    env:
+      APP_PORT: 3050
+      JWT_SECRET: toto000
+      TYPEORM_CONNECTION: mysql
+      TYPEORM_HOST: localhost
+      TYPEORM_USERNAME: root
+      TYPEORM_PASSWORD: root
+      TYPEORM_DATABASE: bookstore
+      TYPEORM_PORT: 3306
+      TYPEORM_SYNCHRONIZE: false
+      TYPEORM_LOGGING: false
+      TYPEORM_MIGRATIONS_RUN: true
+      TYPEORM_ENTITIES: src/modules/**/entity.ts
+    
     services:
       mysql:
           image: mysql:5.7
