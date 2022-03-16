@@ -5,10 +5,6 @@ on:
     types: [review_requested, opened, reopened, synchronize]
     branches:
     - master
-    - main
-    - typescript
-  push:
-    branches:
     - typescript
 
 jobs:
