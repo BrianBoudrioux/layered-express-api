@@ -44,7 +44,7 @@ jobs:
           ref: ${{ github.ref }}
         
       - name: Deploy with rsync
-        run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/layered-express-api/build/
+        run: rsync -avz ./build ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/layered-express-api/build/
           
       - name: Changelog
         uses: scottbrenner/generate-changelog-action@master
