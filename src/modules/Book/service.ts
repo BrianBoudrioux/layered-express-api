@@ -10,8 +10,7 @@ class bookService implements IBookService {
     }
     
     async getAll() {
-        const books = await this.bookRepo.findAll();
-        return books;
+        return await this.bookRepo.findAll();
     }
 
     async add(bookData: book) {
@@ -19,9 +18,7 @@ class bookService implements IBookService {
         if (!bookData.title || !bookData.content)
             throw new ApiError(400, 'Book validation failed');
         
-        const book = await this.bookRepo.addNew(bookData);
-
-        return book;
+        return await this.bookRepo.addNew(bookData);
     }
 
 
