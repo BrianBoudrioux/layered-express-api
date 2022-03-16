@@ -60,7 +60,6 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          
         
       - name: Reload app
-        run: ssh staging 'pm2 reload app'
+        run: ssh staging 'npm i pm2 && pm2 reload app'
