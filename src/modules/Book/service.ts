@@ -19,9 +19,7 @@ class bookService implements IBookService {
         if (!bookData.title || !bookData.content)
             throw new ApiError(400, 'Book validation failed');
         
-        const book = await this.bookRepo.addNew(bookData);
-
-        return book;
+        return await this.bookRepo.addNew(bookData);
     }
 
 
