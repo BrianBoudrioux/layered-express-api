@@ -22,8 +22,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm run test
+    - name: Run build
+      run: npm run build
 
   deploy:
     runs-on: ubuntu-latest
@@ -39,8 +39,11 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         
       - name: Deploy with rsync
-        run: rsync -avz ./src/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/layeredApi/src/
+        run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/layered-express-api/build/
+        
+      - name: Reload App
+        run: pm2 reload app
   
