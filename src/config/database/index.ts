@@ -12,8 +12,8 @@ const options: ConnectionOptions = {
     "synchronize": false,
     "migrationsRun": true,
     "entities": [__dirname + "/../../modules/**/entity.{js,ts}"],
-    "TYPEORM_MIGRATIONS": "src/config/database/migration/*.ts",
-    "TYPEORM_MIGRATIONS_DIR": "src/config/database/migration"
+    "migrations": "src/config/database/migration/*.ts",
+    "migrationsDir": "src/config/database/migration"
 }
 
 const connectionManager = getConnectionManager();
