@@ -5,6 +5,7 @@ on:
     branches:
     - master
     - main
+    - typescript
 
 jobs:
   test:
