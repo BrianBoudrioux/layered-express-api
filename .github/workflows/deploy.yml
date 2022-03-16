@@ -62,7 +62,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           
       - name: Install pm2
-        run: ssh staging 'npm i -g pm2'
+        run: npm i pm2
         
       - name: Reload app
         run: ssh staging 'pm2 reload app'
