@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Deploy with rsync
-        run: rsync -avz ./build ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/layered-express-api/build/
+        run: rsync -avz ./build ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/layered-express-api/build/
           
       - name: Changelog
         uses: scottbrenner/generate-changelog-action@master
