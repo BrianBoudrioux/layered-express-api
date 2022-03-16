@@ -4,7 +4,6 @@ on:
   pull_request:
     types: [review_requested, opened, reopened, synchronize]
     branches:
-    - master
     - typescript
 
 jobs:
