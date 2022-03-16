@@ -40,8 +40,6 @@ jobs:
         
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
         
       - name: Deploy with rsync
         run: rsync -avz ./build ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/layered-express-api/build/
