@@ -4,6 +4,7 @@ import config from './config/env';
 import routes from './modules';
 import middlewares, {logger} from './config/middlewares';
 
+
 const application = new App(routes, middlewares);
 
 (async () => {
