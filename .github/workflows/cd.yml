@@ -22,7 +22,7 @@ jobs:
         run: npm run build
 
       - name: Install ssh key
-        uses: shitamaro/ssh-key-action@v2
+        uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: 'just a placeholder'
